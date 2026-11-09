@@ -1,0 +1,19 @@
+Digitale Bibliothek Thorberg – erster Prototyp
+
+index.html im Browser doppelklicken. Funktioniert ohne Webserver oder Internet (externe Links ausgenommen).
+
+108 Banddatensätze, Originalbilder, zusätzliche kleinere Vorschaubilder.
+Die Daten sind aus dem öffentlichen Omeka-S-Export vom 9. November 2026 abgeleitet.
+Dies ist ein PROTOTYP, keine verifizierte Rekonstruktion der historischen Aufstellung.
+
+Die Sortierung berücksichtigt nur klar lesbare Signaturen mit einem Buchstaben und einer reinen römischen Zahl. Unklare Fälle werden gesondert angezeigt. Eine nicht markierte Lesung gilt ausdrücklich NICHT als wissenschaftlich gesichert.
+
+Die Felder bleiben in daten.json mit ursprünglichen Omeka-Bezeichnungen und vollständiger Mehrfachwertigkeit erhalten. Medien-IDs und Reihenfolge bleiben unverändert.
+
+Die vollständige exportierte Omeka-Sicherung sollte separat aufbewahrt werden. Die Website stellt sie nicht als parallelen Datenbestand dar.
+
+Version 1.1 (9. November 2026): Jede zusätzliche Regalreihe besitzt einen
+separaten braunen Regalboden. Bei aktivierter Skalierung der Buchdicke
+zeigen gestrichelte Umrisse an, dass für einen Band keine Aussenmasse
+vorliegen. Die Kontrollkästchen sind unmittelbar bei ihren Beschriftungen,
+und der Titelbereich ist kompakter. Daten und Fotografien unverändert.
