@@ -7823,8 +7823,8 @@
     "bibliography": "Petrus Berchorius, Dictionarium, Nürnberg bei Koberger, 1489",
     "owner": "UB Bern",
     "shelfmark": "Inc I 65,2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "35 x 25 x 8",
+    "dimension_values": [35.0, 25.0, 8.0],
     "fields": {
       "bibo:owner": [
         {
@@ -7878,6 +7878,14 @@
           "text": "auf vorderen Spiegeln aller 3 Bände: \"Liber Carthusien[sium] In Torrberg/ prouenie[n]s A reuerendo m[a]g[ist]ro Joanne büchler d[e] herre[n]berg/ quo[n]da[m] plebano ac d[e]cano In Walkringenn\" (Band 1, leichte Variationen in den anderen Bänden)",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "35 x 25 x 8",
+          "url": null,
+          "label": "observed dimension"
         }
       ],
       "crm:P65_shows_visual_item": [
