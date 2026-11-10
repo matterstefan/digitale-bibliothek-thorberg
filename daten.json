@@ -127,8 +127,12 @@
     "bibliography": "Petrarca, De utriusque fortuneae remediis, Strassburg vor 1474?",
     "owner": "UB Bern",
     "shelfmark": "Inc II 69",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "29 x 22 x 5.6",
+    "dimension_values": [
+      29.0,
+      22.0,
+      5.6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -182,6 +186,14 @@
           "text": "dt. Urkunde aus Esslingen als Makulatur; ungewöhnlich viele hss. Eintragungen vorne und hinten, dazu der Text annotiert... spannendes Exemplar!",
           "url": null,
           "label": "has value"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "29 x 22 x 5.6",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -6562,7 +6574,11 @@
     "owner": "UB Bern",
     "shelfmark": "Inc I 7,3",
     "dimensions": "42 x 30 x 8",
-    "dimension_values": [42.0, 30.0, 8.0],
+    "dimension_values": [
+      42.0,
+      30.0,
+      8.0
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -7824,7 +7840,11 @@
     "owner": "UB Bern",
     "shelfmark": "Inc I 65,2",
     "dimensions": "35 x 25 x 8",
-    "dimension_values": [35.0, 25.0, 8.0],
+    "dimension_values": [
+      35.0,
+      25.0,
+      8.0
+    ],
     "fields": {
       "bibo:owner": [
         {
