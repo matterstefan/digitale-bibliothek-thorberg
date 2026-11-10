@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Band bearbeiten – Digitale Bibliothek Thorberg</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Helvetica Neue",sans-serif;color:#202b30;background:#f6f5f0}
+*{box-sizing:border-box}body{margin:0}a{color:#1b5c74}header{background:#213b43;color:#fff;padding:17px max(20px,calc((100vw - 1120px)/2))}
+header a{color:#e9f3f4;text-decoration:none;font-size:13px}h1{font:500 clamp(25px,4vw,38px) Georgia,serif;margin:9px 0}main{max-width:1040px;margin:26px auto 70px;padding:0 20px}
+h2{font:500 27px Georgia,serif}h3{font-size:17px;margin:0}p{line-height:1.6}.muted{color:#53656a}
+.note{background:#ebf1ef;border-radius:8px;padding:12px 16px;font-size:14px}
+.toolbar,.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:17px 0}
+select,input,textarea,button{font:inherit}select,input,textarea{border:1px solid #abb9b8;border-radius:6px;padding:9px;background:#fff;color:#202b30}
+select{max-width:100%;width:100%}textarea{width:100%;min-height:68px;resize:vertical}
+button,.button{display:inline-block;cursor:pointer;border:1px solid #326a78;border-radius:7px;padding:9px 13px;color:#1b5969;background:#fff;text-decoration:none;font-weight:600}
+button.primary{background:#215867;color:#fff}button.danger{border-color:#bd9898;color:#842e2e}
+button:disabled{opacity:.45;cursor:not-allowed}.field{background:#fff;border:1px solid #d7e1dd;border-radius:10px;padding:17px;margin:14px 0}
+.fieldhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.value{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;margin:9px 0}
+.value label{display:block;font-size:12px;color:#52636a;margin-bottom:4px}.value .kind{font-size:12px;color:#63787a}
+.value .remove{margin-top:18px}.field button{font-size:13px}
+#status{font-size:14px}.hidden{display:none}.intro{margin-bottom:15px}.foot{font-size:13px;color:#586e70;margin-top:24px}
+@media(max-width:600px){.value{grid-template-columns:1fr}.value .remove{margin:0;justify-self:start}}
+</style></head><body>
+<header><a href="index.html">← Bände &amp; Visualisierung</a><h1>Banddaten bearbeiten</h1></header>
+<main><p class="intro">Mit diesem Formular lassen sich die vorhandenen Erschliessungsangaben eines Bandes ergänzen oder korrigieren. Mehrfachwerte und Verknüpfungen bleiben getrennt. Die Änderungen werden <strong>nicht unmittelbar veröffentlicht</strong>, sondern als Vorschlag zur Prüfung eingereicht.</p>
+<div class="note">Bitte bei abweichenden historischen Signaturlesungen die vorhandene Lesung nicht ohne Weiteres ersetzen, sondern eine zusätzliche Angabe erfassen und ihre Herkunft im Begründungsfeld dokumentieren. Bilder und ihre Zuordnung werden durch dieses Formular nicht verändert.</div>
+<div class="toolbar"><label for="band">Band auswählen</label><select id="band"><option value="">Lade Banddaten …</option></select></div>
+<div id="summary" class="muted"></div><div id="fields"></div>
+<div id="newfield" class="field hidden"><h3>Feld ergänzen</h3><div class="toolbar"><select id="fieldkey"></select><button id="addfield">Feld hinzufügen</button></div></div>
+<section class="field"><h3>Begründung und Quellen</h3><p class="muted">Was hast Du geändert und worauf stützt sich die Änderung?</p><textarea id="reason" placeholder="Begründung, Fundstelle, Literatur oder weitere Hinweise"></textarea></section>
+<div class="actions"><button class="primary" id="issue" disabled>Änderungsvorschlag auf GitHub öffnen</button><button id="download" disabled>Vorschlag als JSON sichern</button><button id="reset" disabled>Änderungen verwerfen</button></div>
+<p id="status" role="status" aria-live="polite"></p><p class="foot">Die JSON-Datei enthält nur die geänderten Felder samt ihren vollständigen Wertelisten und den bisherigen Werten zum Abgleich. Sie ist keine automatische Aktualisierung der öffentlichen Website. Das GitHub-Issue enthält einen lesbaren Änderungsvorschlag; wenn dieser zu umfangreich ist, bitte die heruntergeladene JSON-Datei im Issue anhängen.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id),repo='matterstefan/digitale-bibliothek-thorberg';
+let records=[],active=null,source=null,working=null;
+const fieldLabels={'bibo:owner':'Heutige Bibliothek','bibo:locator':'Heutige Signatur und Katalogverweise','bibo:content':'Bibliographische Angaben','bibo:number':'Historische Signatur und weitere Lesungen','bibo:annotates':'Beschriftungen am Buchäusseren','dcterms:description':'Beschreibung und Anmerkungen','crm:P40_observed_dimension':'Aussenmasse'};
+const clone=x=>JSON.parse(JSON.stringify(x));
+const esc=s=>String(s??'').replace(/[&<>"']/g,t=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[t]));
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const normalize=x=>({type:x.type==='uri'?'uri':'literal',text:x.type==='uri'?null:String(x.text??''),url:x.type==='uri'?String(x.url??''):null,label:x.label||''});
+function choose(id){
+active=records.find(x=>String(x.id)===String(id))||null;
+$('fields').replaceChildren();$('newfield').classList.toggle('hidden',!active);$('reason').value='';
+if(!active){$('summary').textContent='';refresh();return}
+source=clone(active.fields);working=clone(active.fields);
+$('summary').textContent=active.signature+' · '+active.bibliography+' · '+(active.owner||'')+' · Band '+active.id;
+const keys=[...new Set([...Object.keys(fieldLabels),...Object.keys(source)])].sort((a,b)=>((Object.keys(source).includes(a)?0:1)-(Object.keys(source).includes(b)?0:1)));
+$('fieldkey').innerHTML=keys.map(key=>'<option value="'+esc(key)+'">'+esc(fieldLabels[key]||key)+'</option>').join('');
+render();
+}
+function render(){
+$('fields').replaceChildren();
+for(const [key,values] of Object.entries(working)){
+const section=document.createElement('section');section.className='field';
+const top=document.createElement('div');top.className='fieldhead';
+const title=document.createElement('h3');title.textContent=fieldLabels[key]||key;
+const add=document.createElement('button');add.textContent='+ Wert';add.type='button';add.onclick=()=>{values.push({type:'literal',text:'',url:null,label:key.split(':').pop()});render()};
+top.append(title,add);section.append(top);
+values.forEach((v,i)=>{
+const row=document.createElement('div');row.className='value';
+const container=document.createElement('div');const label=document.createElement('label');label.textContent=v.type==='uri'?'Verknüpfung (URL)':'Textwert';
+const input=document.createElement('textarea');input.value=v.type==='uri'?(v.url||''):(v.text||'');input.rows=v.type==='uri'?2:3;
+input.oninput=()=>{if(v.type==='uri')v.url=input.value;else v.text=input.value;refresh()};
+container.append(label,input);
+const side=document.createElement('div');const kind=document.createElement('div');kind.className='kind';kind.textContent=v.type==='uri'?'URL':'Text';
+const del=document.createElement('button');del.className='remove danger';del.textContent='Entfernen';del.type='button';del.onclick=()=>{values.splice(i,1);render()};
+side.append(kind,del);row.append(container,side);section.append(row);
+});$('fields').append(section);
+}
+refresh();
+}
+function changed(){
+if(!active)return [];
+return [...new Set([...Object.keys(source),...Object.keys(working)])].filter(k=>!same(source[k]||[],working[k]||[]));
+}
+function refresh(){
+const keys=changed(),enabled=!!active;
+$('download').disabled=!enabled||!keys.length;
+$('issue').disabled=!enabled||!keys.length;
+$('reset').disabled=!enabled||!keys.length;
+$('status').textContent=keys.length?keys.length+' Feld(er) geändert; noch nicht veröffentlicht.':'Noch keine Änderungen.';
+}
+function proposal(){
+const keys=changed();
+return {schema:'thorberg-edit-proposal-v1',record_id:active.id,signature:active.signature,original_title:active.bibliography,reason:$('reason').value.trim(),changes:Object.fromEntries(keys.map(k=>[k,{before:source[k]||[],after:working[k]||[]}]))};
+}
+function jsonText(){return JSON.stringify(proposal(),null,2)}
+function download(){
+const blob=new Blob([jsonText()],{type:'application/json;charset=utf-8'});
+const a=document.createElement('a');const url=URL.createObjectURL(blob);
+a.href=url;a.download='thorberg-aenderung-band-'+active.id+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function issue(){
+const p=proposal(),lines=['**Band:** '+p.signature,'**Datensatz-ID:** '+p.record_id,'**Titel:** '+p.original_title,'','### Änderungen'];
+for(const [key,v] of Object.entries(p.changes)){
+lines.push('','**'+(fieldLabels[key]||key)+'** ('+key+')','Bisher:');
+for(const val of v.before)lines.push('- '+(val.type==='uri'?'[URL] '+val.url:val.text));
+lines.push('Neu:');
+for(const val of v.after)lines.push('- '+(val.type==='uri'?'[URL] '+val.url:val.text));
+}
+lines.push('','### Begründung / Quelle',p.reason||'(noch keine Angabe)');
+const body=lines.join('\n');
+if(body.length>5500){download();window.open('https://github.com/'+repo+'/issues/new?'+new URLSearchParams({title:'Bearbeitungsvorschlag zu '+p.signature+' (Band '+p.record_id+')',body:'Bitte hier die heruntergeladene JSON-Datei des Änderungsvorschlags anhängen und den Vorschlag absenden.\n\n'+(p.reason||'')}).toString(),'_blank','noopener');return}
+window.open('https://github.com/'+repo+'/issues/new?'+new URLSearchParams({title:'Bearbeitungsvorschlag zu '+p.signature+' (Band '+p.record_id+')',body}).toString(),'_blank','noopener');
+}
+$('band').onchange=e=>choose(e.target.value);
+$('addfield').onclick=()=>{const k=$('fieldkey').value;if(!working[k])working[k]=[];working[k].push({type:'literal',text:'',url:null,label:k.split(':').pop()});render()};
+$('download').onclick=download;$('issue').onclick=issue;
+$('reset').onclick=()=>choose(active.id);
+fetch('daten.json').then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(data=>{
+if(!Array.isArray(data))throw Error('Ungültige Datenstruktur');
+records=data.sort((a,b)=>String(a.signature).localeCompare(String(b.signature),'de',{numeric:true}));
+$('band').innerHTML='<option value="">Bitte Band wählen …</option>'+records.map(x=>'<option value="'+x.id+'">'+esc(x.signature)+' · '+esc(x.bibliography.slice(0,75))+'</option>').join('');
+const id=new URLSearchParams(location.search).get('band');
+if(id&&records.some(x=>String(x.id)===id)){$('band').value=id;choose(id)}
+}).catch(e=>{$('status').textContent='Die Daten konnten nicht geladen werden: '+e.message});
+</script></body></html>
