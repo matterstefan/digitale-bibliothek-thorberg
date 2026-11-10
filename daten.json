@@ -4376,8 +4376,12 @@
     "bibliography": "Biblia latina (cum postillis Hugonis de Sancto Caro), [Basel] : Johann Amerbach, for Anton Koberger, [1498-1502]",
     "owner": "SION - Médiathèque Valais",
     "shelfmark": "BCV RBAC 60",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "35.5 × 24.5 × 6",
+    "dimension_values": [
+      35.5,
+      24.5,
+      6.0
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -4445,20 +4449,20 @@
           "label": "Description"
         }
       ],
-      "crm:P65_shows_visual_item": [
-        {
-          "type": "literal",
-          "text": "355 × 245 × 60 mm",
-          "url": null,
-          "label": "shows visual item"
-        }
-      ],
       "crm:P90_has_value": [
         {
           "type": "literal",
           "text": "En novembre 2016, le Chapitre cathédral de Sion signa une convention de dépôt de sa bibliothèque et archives avec l'Etat du Valais ; les documents furent transférés à la Médiathèque Valais en 2019.",
           "url": null,
           "label": "has value"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "35.5 × 24.5 × 6",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -6002,11 +6006,15 @@
     "group": "G",
     "number": 14,
     "marked_uncertain": false,
-    "bibliography": "Gratian, Decretum",
+    "bibliography": "Gratian, Decretum, Strassburg 1472",
     "owner": "UB Bern",
     "shelfmark": "Inc II 2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "49.3 x 35.2 x 14",
+    "dimension_values": [
+      49.3,
+      35.2,
+      14.0
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -6027,7 +6035,7 @@
       "bibo:content": [
         {
           "type": "literal",
-          "text": "Gratian, Decretum",
+          "text": "Gratian, Decretum, Strassburg 1472",
           "url": null,
           "label": "content"
         }
@@ -6052,6 +6060,14 @@
           "text": "Decretum quo ad causas",
           "url": null,
           "label": "annotates"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "49.3 x 35.2 x 14",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -6187,8 +6203,12 @@
     "bibliography": "Summa Angelica de casibus conscientie, Nürnberg bei Koberger 1498",
     "owner": "UB Bern",
     "shelfmark": "Inc III 60",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32.7 x 22.8 x 5.5",
+    "dimension_values": [
+      32.7,
+      22.8,
+      5.5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -6240,6 +6260,14 @@
           "text": "Suma angelica",
           "url": null,
           "label": "annotates"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32.7 x 22.8 x 5.5",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -6490,8 +6518,12 @@
     "bibliography": "Corpus iuris civilis, Iustiniani Institutiones, Basel 1476",
     "owner": "UB Bern",
     "shelfmark": "Inc II 17",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "41.5 x 29.5 x 6",
+    "dimension_values": [
+      41.5,
+      29.5,
+      6.0
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -6557,6 +6589,14 @@
           "text": "auf vorderem Spiegel: \"Liber Carthusie[nsium] In Torrberg/ p[ro]ueniens a Magistro Joanne Büchler d[e] Herrenb[er]g plebano ac d[e]cano In Walkringenn\"",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": " 41.5 x 29.5 x 6",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -8316,8 +8356,12 @@
     "bibliography": "in drei Bänden jeweils zusammengebunden Bibeldruck, Nürnberg 1475, und Nicolaus von Lyra, Postillen, Strassburg vor 1477",
     "owner": "UB Bern",
     "shelfmark": "Inc II 6,2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "49.5 x 35.5 x 9.5",
+    "dimension_values": [
+      49.5,
+      35.5,
+      9.5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -8370,6 +8414,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "49.5 x 35.5 x 9.5",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -8409,8 +8461,12 @@
     "bibliography": "in drei Bänden jeweils zusammengebunden Bibeldruck, Nürnberg 1475, und Nicolaus von Lyra, Postillen, Strassburg vor 1477",
     "owner": "UB Bern",
     "shelfmark": "Inc II 6,3",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "48.8 x 35.5 x 13",
+    "dimension_values": [
+      48.8,
+      35.5,
+      13.0
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -8469,6 +8525,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "48.8 x 35.5 x 13",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -8496,8 +8560,12 @@
     "bibliography": "in drei Bänden jeweils zusammengebunden Bibeldruck, Nürnberg 1475, und Nicolaus von Lyra, Postillen, Strassburg vor 1477",
     "owner": "UB Bern",
     "shelfmark": "Inc II 6,1",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "49.4 x 35.5 x 12.6",
+    "dimension_values": [
+      49.4,
+      35.5,
+      12.6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -8543,6 +8611,14 @@
           "text": "(fehlt)",
           "url": null,
           "label": "annotates"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "49.4 x 35.5 x 12.6",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -10763,8 +10839,12 @@
     "bibliography": "Repertorium quaestionum super Nicolaum de Tudeschis, Nürnberg, Koberger, um 1485",
     "owner": "UB Bern",
     "shelfmark": "Inc I 13",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "41.6 x 29.7 x 5.6",
+    "dimension_values": [
+      41.6,
+      29.7,
+      5.6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -10819,6 +10899,14 @@
           "url": null,
           "label": "Description"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "41.6 x 29.7 x 5.6",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -10846,8 +10934,12 @@
     "bibliography": "Baptistae Mantuani Carmelitae de patientia aurei libri tres, Basel bei Bergmann von Olpe 1499",
     "owner": "UB Bern",
     "shelfmark": "Inc III 77",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "2.3 x 16.2 x 3.7",
+    "dimension_values": [
+      2.3,
+      16.2,
+      3.7
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -10901,6 +10993,14 @@
           "text": "\"P[er]tinet Carthusie[n]sib[us] In Torberg\"",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "2.3 x 16.2 x 3.7",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
