@@ -21,14 +21,14 @@ button:disabled{opacity:.45;cursor:not-allowed}.field{background:#fff;border:1px
 @media(max-width:600px){.value{grid-template-columns:1fr}.value .remove{margin:0;justify-self:start}}
 </style></head><body>
 <header><a id="backToBand" href="index.html">← Zur Bandansicht zurück</a><h1>Banddaten bearbeiten</h1></header>
-<main><p class="intro">Mit diesem Formular lassen sich die vorhandenen Erschliessungsangaben eines Bandes ergänzen oder korrigieren. Mehrfachwerte und Verknüpfungen bleiben getrennt. Die Änderungen werden <strong>nicht unmittelbar veröffentlicht</strong>, sondern als Vorschlag zur Prüfung eingereicht.</p>
+<main><p class="intro">Mit diesem Formular lassen sich die vorhandenen Erschliessungsangaben eines Bandes ergänzen oder korrigieren. Mehrfachwerte und Verknüpfungen bleiben getrennt. Die Änderungen werden <strong>nicht unmittelbar veröffentlicht</strong>, sondern als Vorschlag zur Prüfung eingereicht. Nach der Prüfung kann der Repository-Inhaber die Übernahme im GitHub-Issue mit dem Kommentar <code>/übernehmen</code> auslösen.</p>
 <div class="note">Bitte bei abweichenden historischen Signaturlesungen die vorhandene Lesung nicht ohne Weiteres ersetzen, sondern eine zusätzliche Angabe erfassen und ihre Herkunft im Begründungsfeld dokumentieren. Bilder und ihre Zuordnung werden durch dieses Formular nicht verändert.</div>
 <div class="toolbar"><label for="band">Band auswählen</label><select id="band"><option value="">Lade Banddaten …</option></select></div>
 <div id="summary" class="muted"></div><div id="fields"></div>
 <div id="newfield" class="field hidden"><h3>Feld ergänzen</h3><div class="toolbar"><select id="fieldkey"></select><button id="addfield">Feld hinzufügen</button></div></div>
 <section class="field"><h3>Begründung und Quellen</h3><p class="muted">Was hast Du geändert und worauf stützt sich die Änderung?</p><textarea id="reason" placeholder="Begründung, Fundstelle, Literatur oder weitere Hinweise"></textarea></section>
 <div class="actions"><button class="primary" id="issue" disabled>Änderungsvorschlag auf GitHub öffnen</button><button id="download" disabled>Vorschlag als JSON sichern</button><button id="reset" disabled>Änderungen verwerfen</button></div>
-<p id="status" role="status" aria-live="polite"></p><p class="foot">Die JSON-Datei enthält nur die geänderten Felder samt ihren vollständigen Wertelisten und den bisherigen Werten zum Abgleich. Sie ist keine automatische Aktualisierung der öffentlichen Website. Das GitHub-Issue enthält einen lesbaren Änderungsvorschlag; wenn dieser zu umfangreich ist, bitte die heruntergeladene JSON-Datei im Issue anhängen.</p>
+<p id="status" role="status" aria-live="polite"></p><p class="foot">Die JSON-Datei enthält nur die geänderten Felder samt ihren vollständigen Wertelisten und den bisherigen Werten zum Abgleich. Normale GitHub-Vorschläge enthalten diese strukturierten Angaben auch direkt und können nach Prüfung automatisch übernommen werden. Sie ist keine automatische Aktualisierung der öffentlichen Website. Das GitHub-Issue enthält einen lesbaren Änderungsvorschlag; wenn dieser zu umfangreich ist, bitte die heruntergeladene JSON-Datei im Issue anhängen.</p>
 </main>
 <script>
 const $=id=>document.getElementById(id),repo='matterstefan/digitale-bibliothek-thorberg';
@@ -93,17 +93,25 @@ const a=document.createElement('a');const url=URL.createObjectURL(blob);
 a.href=url;a.download='thorberg-aenderung-band-'+active.id+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function issue(){
-const p=proposal(),lines=['**Band:** '+p.signature,'**Datensatz-ID:** '+p.record_id,'**Titel:** '+p.original_title,'','### Änderungen'];
+const p=proposal(),summary=['**Band:** '+p.signature,'**Datensatz-ID:** '+p.record_id,'**Titel:** '+p.original_title,'','### Änderungen'];
 for(const [key,v] of Object.entries(p.changes)){
-lines.push('','**'+(fieldLabels[key]||key)+'** ('+key+')','Bisher:');
-for(const val of v.before)lines.push('- '+(val.type==='uri'?'[URL] '+val.url:val.text));
-lines.push('Neu:');
-for(const val of v.after)lines.push('- '+(val.type==='uri'?'[URL] '+val.url:val.text));
+summary.push('','**'+(fieldLabels[key]||key)+'** ('+key+')','Bisher:');
+for(const val of v.before)summary.push('- '+(val.type==='uri'?'[URL] '+val.url:val.text));
+summary.push('Neu:');
+for(const val of v.after)summary.push('- '+(val.type==='uri'?'[URL] '+val.url:val.text));
 }
-lines.push('','### Begründung / Quelle',p.reason||'(noch keine Angabe)');
-const body=lines.join('\n');
-if(body.length>5500){download();window.open('https://github.com/'+repo+'/issues/new?'+new URLSearchParams({title:'Bearbeitungsvorschlag zu '+p.signature+' (Band '+p.record_id+')',body:'Bitte hier die heruntergeladene JSON-Datei des Änderungsvorschlags anhängen und den Vorschlag absenden.\n\n'+(p.reason||'')}).toString(),'_blank','noopener');return}
-window.open('https://github.com/'+repo+'/issues/new?'+new URLSearchParams({title:'Bearbeitungsvorschlag zu '+p.signature+' (Band '+p.record_id+')',body}).toString(),'_blank','noopener');
+summary.push('','### Begründung / Quelle',p.reason||'(noch keine Angabe)');
+const machine='<!-- THORBERG_EDIT_V1\n'+JSON.stringify(p)+'\nEND_THORBERG_EDIT_V1 -->';
+const fullBody=summary.join('\n')+'\n\n'+machine;
+const title='Bearbeitungsvorschlag zu '+p.signature+' (Band '+p.record_id+')';
+if(encodeURIComponent(fullBody).length>6000){
+download();
+alert('Der Vorschlag ist für die automatische GitHub-Übernahme zu umfangreich. Die JSON-Datei wurde heruntergeladen. Bitte füge sie dem Issue als Anhang hinzu; dieser Fall muss noch manuell übernommen werden.');
+const smallBody=summary.join('\n')+'\n\n**Umfangreicher Änderungsvorschlag:** Bitte die heruntergeladene JSON-Datei anhängen. Dieser Vorschlag kann noch nicht mit /übernehmen automatisch verarbeitet werden.';
+window.open('https://github.com/'+repo+'/issues/new?'+new URLSearchParams({title,body:smallBody}).toString(),'_blank','noopener');
+return;
+}
+window.open('https://github.com/'+repo+'/issues/new?'+new URLSearchParams({title,body:fullBody}).toString(),'_blank','noopener');
 }
 $('band').onchange=e=>choose(e.target.value);
 $('addfield').onclick=()=>{const k=$('fieldkey').value;if(!working[k])working[k]=[];working[k].push({type:'literal',text:'',url:null,label:k.split(':').pop()});render()};
