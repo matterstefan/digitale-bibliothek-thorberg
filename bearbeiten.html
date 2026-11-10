@@ -20,7 +20,7 @@ button:disabled{opacity:.45;cursor:not-allowed}.field{background:#fff;border:1px
 #status{font-size:14px}.hidden{display:none}.intro{margin-bottom:15px}.foot{font-size:13px;color:#586e70;margin-top:24px}
 @media(max-width:600px){.value{grid-template-columns:1fr}.value .remove{margin:0;justify-self:start}}
 </style></head><body>
-<header><a href="index.html">← Bände &amp; Visualisierung</a><h1>Banddaten bearbeiten</h1></header>
+<header><a id="backToBand" href="index.html">← Zur Bandansicht zurück</a><h1>Banddaten bearbeiten</h1></header>
 <main><p class="intro">Mit diesem Formular lassen sich die vorhandenen Erschliessungsangaben eines Bandes ergänzen oder korrigieren. Mehrfachwerte und Verknüpfungen bleiben getrennt. Die Änderungen werden <strong>nicht unmittelbar veröffentlicht</strong>, sondern als Vorschlag zur Prüfung eingereicht.</p>
 <div class="note">Bitte bei abweichenden historischen Signaturlesungen die vorhandene Lesung nicht ohne Weiteres ersetzen, sondern eine zusätzliche Angabe erfassen und ihre Herkunft im Begründungsfeld dokumentieren. Bilder und ihre Zuordnung werden durch dieses Formular nicht verändert.</div>
 <div class="toolbar"><label for="band">Band auswählen</label><select id="band"><option value="">Lade Banddaten …</option></select></div>
@@ -40,6 +40,8 @@ const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const normalize=x=>({type:x.type==='uri'?'uri':'literal',text:x.type==='uri'?null:String(x.text??''),url:x.type==='uri'?String(x.url??''):null,label:x.label||''});
 function choose(id){
 active=records.find(x=>String(x.id)===String(id))||null;
+$('backToBand').href=active?'index.html#band-'+encodeURIComponent(active.id):'index.html';
+$('backToBand').textContent=active?'← Zur vorherigen Bandansicht zurück':'← Zur Bändeübersicht zurück';
 $('fields').replaceChildren();$('newfield').classList.toggle('hidden',!active);$('reason').value='';
 if(!active){$('summary').textContent='';refresh();return}
 source=clone(active.fields);working=clone(active.fields);
