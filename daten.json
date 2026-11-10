@@ -2974,8 +2974,12 @@
     "bibliography": "Ambrosius von Mailand, Opera, Basel bei Ammerbach 1492",
     "owner": "UB Bern",
     "shelfmark": "Inc III 23,1",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32.5 x 22.5 x 8.0",
+    "dimension_values": [
+      32.5,
+      22.5,
+      8.0
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -3022,6 +3026,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32.5 x 22.5 x 8.0",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -3049,8 +3061,12 @@
     "bibliography": "Ambrosius von Mailand, Opera, Basel bei Ammerbach 1492",
     "owner": "UB Bern",
     "shelfmark": "Inc III 23,2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32.5 x 22.5 x 8.5",
+    "dimension_values": [
+      32.5,
+      22.5,
+      8.5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -3098,6 +3114,14 @@
           "text": "Pertinet Carthusiensib[us] Jn Torberg",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32.5 x 22.5 x 8.5",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
