@@ -1328,8 +1328,12 @@
     "bibliography": "Alexander von Hales, Summa theologica, Nürnberg 1482",
     "owner": "UB Bern",
     "shelfmark": "Inc II 13,2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "42.6 x 29.5 x 9.2",
+    "dimension_values": [
+      42.6,
+      29.5,
+      9.2
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -1392,6 +1396,14 @@
           "url": null,
           "label": "has value"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "42.6 x 29.5 x 9.2",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -1419,8 +1431,12 @@
     "bibliography": "Alexander von Hales, Summa theologica, Nürnberg 1482",
     "owner": "UB Bern",
     "shelfmark": "Inc II 13,3",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "42.6 x 29.5 x 7.0",
+    "dimension_values": [
+      42.6,
+      29.5,
+      7.0
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -1483,6 +1499,14 @@
           "url": null,
           "label": "has value"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "42.6 x 29.5 x 7.0",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -1510,8 +1534,12 @@
     "bibliography": "Alexander von Hales, Summa theologica, Nürnberg 1482",
     "owner": "UB Bern",
     "shelfmark": "Inc II 13,4",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "42.5 x 30.0 x 9.6",
+    "dimension_values": [
+      42.5,
+      30.0,
+      9.6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -1567,6 +1595,14 @@
           "text": "alle mit derselben Signatur (Lindt gibt D LIII–VI an)!",
           "url": null,
           "label": "has value"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "42.5 x 30.0 x 9.6",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -2286,8 +2322,12 @@
     "bibliography": "Perlustratio Sancti Bonauenture in ... librum Sententiarum, Freiburg bei Kilian Fischer, nach 1493",
     "owner": "UB Bern",
     "shelfmark": "Inc III 59,2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32.4 x 22.7 x 6",
+    "dimension_values": [
+      32.4,
+      22.7,
+      6.0
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -2356,6 +2396,14 @@
           "url": null,
           "label": "has value"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32.4 x 22.7 x 6",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -2383,8 +2431,12 @@
     "bibliography": "Perlustratio Sancti Bonauenture in ... librum Sententiarum, Freiburg bei Kilian Fischer, nach 1493",
     "owner": "UB Bern",
     "shelfmark": "Inc III 59,1",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32.3 x 22.6 x 5.5",
+    "dimension_values": [
+      32.3,
+      22.6,
+      5.5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -2441,6 +2493,14 @@
           "url": null,
           "label": "has value"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32.3 x 22.6 x 5.5",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -2468,8 +2528,12 @@
     "bibliography": "Perlustratio Sancti Bonauenture in ... librum Sententiarum, Freiburg bei Kilian Fischer, nach 1493",
     "owner": "UB Bern",
     "shelfmark": "Inc III 59,3",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32.3 x 22.4 x 6.3",
+    "dimension_values": [
+      32.3,
+      22.4,
+      6.3
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -2526,6 +2590,14 @@
           "url": null,
           "label": "has value"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32.3 x 22.4 x 6.3",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -2553,8 +2625,12 @@
     "bibliography": "Perlustratio Sancti Bonauenture in ... librum Sententiarum, Freiburg bei Kilian Fischer, nach 1493",
     "owner": "UB Bern",
     "shelfmark": "Inc III 59,4",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32.1 x 22.4 x 5.7",
+    "dimension_values": [
+      32.1,
+      22.4,
+      5.7
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -2617,6 +2693,14 @@
           "url": null,
           "label": "has value"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32.1 x 22.4 x 5.7",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -2664,8 +2748,12 @@
     "bibliography": "Perlustratio Sancti Bonauenture in ... librum Sententiarum, Freiburg bei Kilian Fischer, nach 1493",
     "owner": "UB Bern",
     "shelfmark": "Inc III 59,5",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32 x 22.7 x 3.8",
+    "dimension_values": [
+      32.0,
+      22.7,
+      3.8
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -2721,6 +2809,14 @@
           "text": "nicht rubriziert",
           "url": null,
           "label": "has value"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32 x 22.7 x 3.8",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
