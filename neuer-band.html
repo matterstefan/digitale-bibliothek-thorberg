@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neuen Band erfassen – Digitale Bibliothek Thorberg</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Helvetica Neue",sans-serif;color:#202b30;background:#f6f5f0}*{box-sizing:border-box}body{margin:0}a{color:#1b5c74}
+header{background:#213b43;color:#fff;padding:16px max(20px,calc((100vw - 1040px)/2))}header a{color:#e5eff0;text-decoration:none;font-size:13px}header h1{font:500 clamp(26px,4vw,38px) Georgia,serif;margin:10px 0}
+main{max-width:1040px;margin:25px auto 70px;padding:0 20px}p{line-height:1.65}.muted{color:#52636a}
+.notice{border-radius:9px;background:#e8f0ed;padding:13px 16px;font-size:14px;margin:16px 0}
+.panel{background:white;border:1px solid #d7e1dd;border-radius:10px;padding:20px;margin:16px 0}
+h2{font:500 24px Georgia,serif;margin:0 0 15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+label{font-weight:600;font-size:14px;display:block;margin:12px 0 5px}
+input,textarea{box-sizing:border-box;width:100%;font:inherit;padding:10px;border:1px solid #aabbb8;border-radius:6px;background:#fff;color:#202b30}
+textarea{min-height:86px;resize:vertical}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:20px 0}
+button{background:#215867;color:white;border:0;border-radius:7px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
+button.secondary{background:#fff;border:1px solid #326a78;color:#205868}
+.small{font-size:13px;color:#52636a}
+</style></head><body>
+<header><a href="index.html">← Bände &amp; Visualisierung</a><h1>Neuen Band erfassen</h1></header>
+<main>
+<p>Mit diesem Formular kannst Du einen <strong>zusätzlichen physischen Band</strong> der Thorberger Bibliothek zur Aufnahme vorschlagen. Anders als bei der Bearbeitung vorhandener Datensätze muss ein neuer Band vor der Veröffentlichung redaktionell geprüft und eine eindeutige lokale Datensatz-ID vergeben werden.</p>
+<div class="notice">Die historische Signatur bitte nur angeben, wenn sie tatsächlich belegt ist. Eine aus benachbarten Signaturen vermutete Zuordnung gehört stattdessen in die Anmerkungen. Fotos werden hier noch <strong>nicht automatisch hochgeladen</strong>; Bilddateien können im GitHub-Issue als Anhang ergänzt und später dem neuen Band zugeordnet werden.</div>
+<form id="newRecord">
+<section class="panel">
+<h2>Band und heutiger Standort</h2>
+<div class="grid">
+<div><label for="owner">Aufbewahrende Bibliothek *</label><input id="owner" required value="UB Bern"></div>
+<div><label for="shelfmark">Heutige Signatur *</label><input id="shelfmark" required placeholder="z. B. Inc III 23,3"></div>
+<div><label for="signature">Historische Thorberger Signatur</label><input id="signature" placeholder="Nur gesichert belegte Lesung"></div>
+<div><label for="dimensions">Aussenmasse (cm)</label><input id="dimensions" placeholder="Höhe x Breite x Dicke, z. B. 32 x 23 x 7"></div>
+</div>
+<label for="bibliography">Bibliographische Angaben *</label><textarea id="bibliography" required placeholder="Autor, Werktitel, Druckort, Drucker, Jahr"></textarea>
+<label for="catalogue">Katalogverweis (URL)</label><input id="catalogue" type="url" placeholder="https://swisscollections.ch/Record/...">
+</section>
+<section class="panel">
+<h2>Exemplarspezifische Angaben</h2>
+<label for="spine">Beschriftungen am Buchäusseren</label><textarea id="spine" placeholder="Transkription mit gegebenenfalls unsicheren Lesungen"></textarea>
+<label for="description">Weitere Beschreibungen, Besitzvermerke und Provenienzangaben</label><textarea id="description" placeholder="Wortlaut, Stelle im Buch, Einband, Beobachtungen"></textarea>
+<label for="photographs">Fotos und Bildzuordnungen</label><textarea id="photographs" placeholder="Vorhandene Bilddatei, Foto-ID, Beschreibung des Fotos; das Foto danach im GitHub-Issue anhängen"></textarea>
+<label for="reason">Quellen, Erläuterungen und Unsicherheiten</label><textarea id="reason" placeholder="Belege oder Hinweise auf verwandte Bände"></textarea>
+</section>
+<div class="actions"><button type="submit">Neuen Band als GitHub-Issue vorschlagen</button><button type="button" class="secondary" id="download">Vorschlag als JSON sichern</button></div>
+<p class="small">Die Eingaben bleiben zunächst nur in Deinem Browser. Der GitHub-Issue-Vorschlag wird erst erstellt, wenn Du ihn auf GitHub absendest; die Veröffentlichung des Bandes erfolgt nach redaktioneller Prüfung. Die Sammelfreigabe <code>/übernehmen</code> ist vorerst nur für Änderungen an bestehenden Datensätzen vorgesehen.</p>
+</form></main>
+<script>
+const $=id=>document.getElementById(id);
+const ids=['owner','shelfmark','signature','dimensions','bibliography','catalogue','spine','description','photographs','reason'];
+const params=new URLSearchParams(location.search);
+if(params.get('shelfmark'))$('shelfmark').value=params.get('shelfmark');
+if(params.get('bibliography'))$('bibliography').value=params.get('bibliography');
+if(params.get('reason'))$('reason').value=params.get('reason');
+function proposal(){const o={schema:'thorberg-new-record-v1'};for(const id of ids)o[id]=$(id).value.trim();return o}
+function download(){const p=proposal(),blob=new Blob([JSON.stringify(p,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='thorberg-neuer-band.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+$('download').onclick=download;
+$('newRecord').onsubmit=e=>{e.preventDefault();const p=proposal();const lines=['**Neuer Band – Aufnahmevorschlag**','','**Aufbewahrende Bibliothek:** '+p.owner,'**Heutige Signatur:** '+p.shelfmark,'**Historische Thorberger Signatur:** '+(p.signature||'nicht erfasst / nicht gesichert'),'','### Bibliographische Angaben',p.bibliography,'','### Katalogverweis',p.catalogue||'–','','### Aussenmasse',p.dimensions||'–','','### Beschriftungen',p.spine||'–','','### Weitere Angaben',p.description||'–','','### Fotos und Bildzuordnungen',p.photographs||'–','','### Quellen und Bemerkungen',p.reason||'–'];
+const payload='<!-- THORBERG_NEW_RECORD_V1\n'+JSON.stringify(p)+'\nEND_THORBERG_NEW_RECORD_V1 -->';
+const body=lines.join('\n')+'\n\n'+payload;
+if(encodeURIComponent(body).length>6500){download();alert('Der Vorschlag ist sehr umfangreich. Die JSON-Datei wurde heruntergeladen. Bitte beim Issue anhängen.');}
+const issueBody=encodeURIComponent(body).length>6500?lines.join('\n')+'\n\n**JSON-Datei bitte anhängen.**':body;
+const url='https://github.com/matterstefan/digitale-bibliothek-thorberg/issues/new?'+new URLSearchParams({title:'Neuer Band: '+p.shelfmark,body:issueBody});
+window.open(url,'_blank','noopener');
+};
+</script></body></html>
