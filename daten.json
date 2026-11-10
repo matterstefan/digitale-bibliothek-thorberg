@@ -329,8 +329,12 @@
     "bibliography": "Fasciculus temporum",
     "owner": "UB Bern",
     "shelfmark": "Inc I 82",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "27.9 x 20.8 x 5.7",
+    "dimension_values": [
+      27.9,
+      20.8,
+      5.7
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -400,6 +404,14 @@
           "text": "(fehlt)",
           "url": null,
           "label": "annotates"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "27.9 x 20.8 x 5.7",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -809,8 +821,12 @@
     "bibliography": "Bibel, Basel bei Bernhard Richel, 1475",
     "owner": "UB Bern",
     "shelfmark": "Inc II 28",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40.2 x 30.8 x 14.3",
+    "dimension_values": [
+      40.2,
+      30.8,
+      14.3
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -833,6 +849,12 @@
           "type": "literal",
           "text": "Bibel, Basel bei Bernhard Richel, 1475",
           "url": null,
+          "label": "content"
+        },
+        {
+          "type": "uri",
+          "text": null,
+          "url": "https://swisscollections.ch/Record/991082624819705501?sid=267217090",
           "label": "content"
         }
       ],
@@ -865,6 +887,14 @@
           "url": null,
           "label": "has value"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40.2 x 30.8 x 14.3",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -892,8 +922,12 @@
     "bibliography": "Thomas von Aquin, Summa theologiae, Nürnberg bei Koberger 1496",
     "owner": "UB Bern",
     "shelfmark": "Inc III 50,1",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32 x 23 x 7.4",
+    "dimension_values": [
+      32.0,
+      23.0,
+      7.4
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -948,6 +982,14 @@
           "url": null,
           "label": "Description"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32 x 23 x 7.4",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -975,8 +1017,12 @@
     "bibliography": "Thomas von Aquin, Summa theologiae, Nürnberg bei Koberger 1496",
     "owner": "UB Bern",
     "shelfmark": "Inc III 50,2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "31.2 x 22.6 x 8.5",
+    "dimension_values": [
+      31.2,
+      22.6,
+      8.5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -1039,6 +1085,14 @@
           "url": null,
           "label": "has value"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "31.2 x 22.6 x 8.5",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -1066,8 +1120,12 @@
     "bibliography": "Thomas von Aquin, Quaestiones de veritate, Köln 1475",
     "owner": "UB Bern",
     "shelfmark": "Inc I 80",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "30.5 x 21.5 x 11.8",
+    "dimension_values": [
+      30.5,
+      21.5,
+      11.8
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -1120,6 +1178,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "30.5 x 21.5 x 11.8",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -1159,8 +1225,12 @@
     "bibliography": "Alexander von Hales, Summa theologica, Nürnberg 1482",
     "owner": "UB Bern",
     "shelfmark": "Inc II 13,1",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "42.9 x 30.3 x 6.5",
+    "dimension_values": [
+      42.9,
+      30.3,
+      6.5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -1222,6 +1292,14 @@
           "text": "alle mit derselben Signatur (Lindt gibt D LIII–VI an)!",
           "url": null,
           "label": "has value"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "42.9 x 30.3 x 6.5",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
