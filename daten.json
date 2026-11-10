@@ -2978,7 +2978,7 @@
     "dimension_values": [
       32.5,
       22.5,
-      8.0
+      8
     ],
     "fields": {
       "bibo:owner": [
@@ -3222,20 +3222,8 @@
     },
     "media": [
       {
-        "id": 7567,
-        "order": 0,
-        "title": null,
-        "source": "Inc III 23_3 Besitzereintrag.jpeg",
-        "type": "image/jpeg",
-        "renderer": "file",
-        "original_url": "https://omeka.unibe.ch/files/original/73424c00d5a46e75501be21b10e0b79b33973bbb.jpeg",
-        "alt": null,
-        "file": "originale/7567.jpeg",
-        "preview": "bilder/7567.jpg"
-      },
-      {
         "id": 10757,
-        "order": 1,
+        "order": 0,
         "title": null,
         "source": "Inc III 23_3.jpeg",
         "type": "image/jpeg",
@@ -3244,6 +3232,18 @@
         "alt": "Rücken von Inc III 23,3 mit der historischen Signaturnummer XXI",
         "file": "bilder/ambrosius-inc-iii-23-3.jpeg",
         "preview": "bilder/ambrosius-inc-iii-23-3.jpeg"
+      },
+      {
+        "id": 7567,
+        "order": 1,
+        "title": null,
+        "source": "Inc III 23_3 Besitzereintrag.jpeg",
+        "type": "image/jpeg",
+        "renderer": "file",
+        "original_url": "https://omeka.unibe.ch/files/original/73424c00d5a46e75501be21b10e0b79b33973bbb.jpeg",
+        "alt": null,
+        "file": "originale/7567.jpeg",
+        "preview": "bilder/7567.jpg"
       }
     ],
     "omeka": null
