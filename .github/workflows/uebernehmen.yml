@@ -1,0 +1,48 @@
+name: Geprüften Bandvorschlag übernehmen
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: thorberg-edits
+  cancel-in-progress: false
+
+jobs:
+  uebernehmen:
+    if: >-
+      github.event.issue.pull_request == null &&
+      github.event.issue.state == 'open' &&
+      github.actor == github.repository_owner &&
+      github.event.comment.body == '/übernehmen'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository abrufen
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Änderung prüfen und vorbereiten
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: python3 scripts/apply_issue.py
+      - name: Geprüfte Änderung publizieren
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add daten.json index.html
+          git diff --cached --exit-code && { echo 'Keine Änderungen vorhanden'; exit 1; } || true
+          git commit -m "Banddaten aus Issue #${ISSUE_NUMBER} übernehmen"
+          git push
+      - name: Issue schliessen
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: gh issue close "${ISSUE_NUMBER}" --reason completed --comment "Änderung geprüft und in den veröffentlichten Datenbestand übernommen."
