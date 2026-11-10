@@ -1,0 +1,184 @@
+#!/usr/bin/env python3
+"""Apply a reviewed Thorberg edit proposal to data and the embedded site data.
+
+Executed by the GitHub Action after the repository owner comments /übernehmen.
+Only JSON data is parsed; no code from the issue is ever executed.
+"""
+import json
+import os
+import re
+import sys
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "daten.json"
+INDEX = ROOT / "index.html"
+RECORDS_PATTERN = re.compile(
+    r'(<script id="records" type="application/json">)(.*?)(</script>)', re.S
+)
+PROPOSAL_PATTERN = re.compile(r"<!-- THORBERG_EDIT_V1\s*(\{.*?\})\s*END_THORBERG_EDIT_V1 -->", re.S)
+MAX_ISSUE_BODY = 100_000
+
+
+def request(url, method="GET", payload=None):
+    token = os.environ["GH_TOKEN"]
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "thorberg-review-automation",
+    }
+    body = json.dumps(payload).encode("utf-8") if payload is not None else None
+    if body is not None:
+        headers["Content-Type"] = "application/json"
+    with urllib.request.urlopen(urllib.request.Request(url, data=body, headers=headers, method=method), timeout=30) as response:
+        return json.load(response)
+
+
+def issue_api():
+    repo = os.environ["GITHUB_REPOSITORY"]
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo):
+        raise ValueError("Unexpected repository")
+    number = int(os.environ["ISSUE_NUMBER"])
+    return f"https://api.github.com/repos/{repo}/issues/{number}", number
+
+
+def read_proposal(body):
+    if not isinstance(body, str) or len(body) > MAX_ISSUE_BODY:
+        raise ValueError("Issue body invalid or too large")
+    matches = PROPOSAL_PATTERN.findall(body)
+    if len(matches) != 1:
+        raise ValueError("No unique structured edit proposal found; create a new proposal using the updated form")
+    proposal = json.loads(matches[0])
+    if not isinstance(proposal, dict) or proposal.get("schema") != "thorberg-edit-proposal-v1":
+        raise ValueError("Unrecognized proposal schema")
+    if not isinstance(proposal.get("record_id"), int):
+        raise ValueError("Invalid record id")
+    changes = proposal.get("changes")
+    if not isinstance(changes, dict) or not (1 <= len(changes) <= 30):
+        raise ValueError("No valid changes")
+    return proposal
+
+
+def validate_values(values):
+    if not isinstance(values, list) or len(values) > 100:
+        raise ValueError("Invalid value list")
+    for v in values:
+        if not isinstance(v, dict) or set(v) != {"type", "text", "url", "label"}:
+            raise ValueError("Invalid field value")
+        if v["type"] not in ("literal", "uri") or not isinstance(v["label"], str):
+            raise ValueError("Invalid type or label")
+        if len(v["label"]) > 250:
+            raise ValueError("Label too long")
+        if v["type"] == "literal":
+            if not isinstance(v["text"], str) or v["url"] is not None:
+                raise ValueError("Invalid literal value")
+        else:
+            if v["text"] is not None or not isinstance(v["url"], str) or not re.match(r"^https?://", v["url"], re.I):
+                raise ValueError("Invalid URL value")
+        if len(str(v.get("text") or v.get("url") or "")) > 20_000:
+            raise ValueError("Field value too large")
+
+
+def parse_dimensions(values):
+    if not values:
+        return "", None
+    if len(values) != 1 or values[0]["type"] != "literal":
+        raise ValueError("The visualisation supports exactly one dimension value")
+    text = values[0]["text"].strip()
+    if not text:
+        return "", None
+    parts = re.split(r"\s*[x×]\s*", text, flags=re.I)
+    if len(parts) != 3 or not all(re.fullmatch(r"\d+(?:[,.]\d+)?", p) for p in parts):
+        raise ValueError("Measurements need the format height x width x depth (cm)")
+    nums = [float(p.replace(",", ".")) for p in parts]
+    if not all(0 < v <= 200 for v in nums):
+        raise ValueError("Measurements out of plausible range")
+    return text, nums
+
+
+def literal_first(values):
+    if not values:
+        return ""
+    if values[0]["type"] != "literal":
+        raise ValueError("Main display field must be text")
+    return values[0]["text"]
+
+
+def apply(data, proposal):
+    match = [r for r in data if r["id"] == proposal["record_id"]]
+    if len(match) != 1:
+        raise ValueError("Record not found or duplicated")
+    record = match[0]
+    if record["signature"] != proposal.get("signature"):
+        raise ValueError("Signature differs from the reviewed proposal")
+    if record["bibliography"] != proposal.get("original_title"):
+        raise ValueError("Title differs from the reviewed proposal")
+    fields = record["fields"]
+    for key, item in proposal["changes"].items():
+        if not isinstance(key, str) or not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*:[A-Za-z][A-Za-z0-9_]*", key):
+            raise ValueError("Invalid field key")
+        if key == "bibo:number":
+            raise ValueError("Historical signature changes require manual review of group and sorting")
+        if not isinstance(item, dict) or set(item) != {"before", "after"}:
+            raise ValueError("Invalid change")
+        before, after = item["before"], item["after"]
+        validate_values(before)
+        validate_values(after)
+        if fields.get(key, []) != before:
+            raise ValueError(f"Field {key} changed since the proposal was submitted; no data written")
+        if before == after:
+            raise ValueError(f"No change to field {key}")
+    # Apply only after every changed field has passed the old-value checks.
+    for key, item in proposal["changes"].items():
+        after = item["after"]
+        if after:
+            fields[key] = after
+        else:
+            fields.pop(key, None)
+    if "crm:P40_observed_dimension" in proposal["changes"]:
+        record["dimensions"], record["dimension_values"] = parse_dimensions(fields.get("crm:P40_observed_dimension", []))
+    for key, prop in (("bibo:owner", "owner"), ("bibo:locator", "shelfmark"), ("bibo:content", "bibliography")):
+        if key in proposal["changes"]:
+            record[prop] = literal_first(fields.get(key, []))
+    return record
+
+
+def write_files(proposal):
+    data = json.loads(DATA.read_text(encoding="utf-8"))
+    index = INDEX.read_text(encoding="utf-8")
+    match = RECORDS_PATTERN.search(index)
+    if not match:
+        raise ValueError("Cannot find embedded site data")
+    site_data = json.loads(match.group(2))
+    if data != site_data:
+        raise ValueError("daten.json and index.html disagree; changes need manual inspection")
+    record = apply(data, proposal)
+    # JSON in HTML script must not contain a closing script tag from untrusted text.
+    data_text = json.dumps(data, ensure_ascii=False, indent=2)
+    html_data = data_text.replace("<", "\\u003c")
+    new_index = index[:match.start(2)] + html_data + index[match.end(2):]
+    assert json.loads(RECORDS_PATTERN.search(new_index).group(2)) == data
+    DATA.write_text(data_text + "\n", encoding="utf-8")
+    INDEX.write_text(new_index, encoding="utf-8")
+    print(f"Applied changes to band {record['id']} ({record['signature']}).")
+
+
+def main():
+    url, number = issue_api()
+    issue = request(url)
+    if issue.get("pull_request") or issue.get("state") != "open":
+        raise ValueError("Only open issues can be applied")
+    proposal = read_proposal(issue.get("body", ""))
+    write_files(proposal)
+    print(f"Issue #{number} checked and updated locally. Commit/push handled by workflow.")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except (ValueError, KeyError, TypeError, OSError, urllib.error.URLError) as exc:
+        print(f"Cannot apply proposal: {exc}", file=sys.stderr)
+        sys.exit(1)
