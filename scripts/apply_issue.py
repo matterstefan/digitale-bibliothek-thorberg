@@ -146,7 +146,22 @@ def apply(data, proposal):
     return record
 
 
-def write_files(proposal):
+def requested_issue_numbers():
+    """One issue with /übernehmen, or an explicit numbered batch."""
+    trigger = int(os.environ["ISSUE_NUMBER"])
+    command = os.environ.get("APPROVAL_COMMENT", "").strip()
+    if not re.fullmatch(r"/übernehmen(?: [1-9]\d*)*", command):
+        raise ValueError("Expected /übernehmen or /übernehmen 4 5 6")
+    parts = command.split()
+    numbers = [trigger] if len(parts) == 1 else [int(x) for x in parts[1:]]
+    if len(numbers) > 20 or len(set(numbers)) != len(numbers):
+        raise ValueError("Too many or duplicate issue numbers")
+    if trigger not in numbers:
+        raise ValueError("The issue containing the approval comment must be included in the batch")
+    return numbers
+
+
+def write_files(proposals):
     data = json.loads(DATA.read_text(encoding="utf-8"))
     index = INDEX.read_text(encoding="utf-8")
     match = RECORDS_PATTERN.search(index)
@@ -155,7 +170,10 @@ def write_files(proposal):
     site_data = json.loads(match.group(2))
     if data != site_data:
         raise ValueError("daten.json and index.html disagree; changes need manual inspection")
-    record = apply(data, proposal)
+    # Validate all proposals in memory before writing either file.
+    for number, proposal in proposals:
+        record = apply(data, proposal)
+        print(f"Issue #{number}: validated {record['id']} ({record['signature']})")
     # JSON in HTML script must not contain a closing script tag from untrusted text.
     data_text = json.dumps(data, ensure_ascii=False, indent=2)
     html_data = data_text.replace("<", "\\u003c")
@@ -163,17 +181,29 @@ def write_files(proposal):
     assert json.loads(RECORDS_PATTERN.search(new_index).group(2)) == data
     DATA.write_text(data_text + "\n", encoding="utf-8")
     INDEX.write_text(new_index, encoding="utf-8")
-    print(f"Applied changes to band {record['id']} ({record['signature']}).")
+    print(f"All {len(proposals)} proposals applied to both files.")
 
 
 def main():
-    url, number = issue_api()
-    issue = request(url)
-    if issue.get("pull_request") or issue.get("state") != "open":
-        raise ValueError("Only open issues can be applied")
-    proposal = read_proposal(issue.get("body", ""))
-    write_files(proposal)
-    print(f"Issue #{number} checked and updated locally. Commit/push handled by workflow.")
+    url, trigger = issue_api()
+    numbers = requested_issue_numbers()
+    if len(numbers) > 1:
+        print("Batch approval requested: " + ", ".join(map(str, numbers)))
+    prefix = url.rsplit("/", 1)[0]
+    proposals = []
+    for number in numbers:
+        issue = request(f"{prefix}/{number}")
+        if issue.get("pull_request") or issue.get("state") != "open":
+            raise ValueError(f"Issue #{number} is not open or is a pull request")
+        proposal = read_proposal(issue.get("body", ""))
+        proposals.append((number, proposal))
+    write_files(proposals)
+    if "GITHUB_OUTPUT" in os.environ:
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
+            stream.write("issue_numbers=" + ",".join(map(str, numbers)) + "\n")
+    print("Commit/push will be handled by the workflow.")
+
+
 
 
 if __name__ == "__main__":
