@@ -4636,8 +4636,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 4",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 5",
+    "dimension_values": [
+      40,
+      29,
+      5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -4689,6 +4693,14 @@
           "text": "Iste liber pertinet domui Porte Montis prope Bernum ord. Carth.",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 5",
+          "url": null,
+          "label": "observed dimension"
         }
       ]
     },
@@ -5409,10 +5421,10 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 2",
-    "dimensions": "29 x 40 x 5",
+    "dimensions": "40 x 29 x 5",
     "dimension_values": [
-      29,
       40,
+      29,
       5
     ],
     "fields": {
@@ -5467,7 +5479,7 @@
       "crm:P40_observed_dimension": [
         {
           "type": "literal",
-          "text": "29 x 40 x 5",
+          "text": "40 x 29 x 5",
           "url": null,
           "label": "observed dimension"
         }
@@ -5506,8 +5518,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 3",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 5",
+    "dimension_values": [
+      40,
+      29,
+      5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5548,6 +5564,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 5",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -5575,8 +5599,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5: 5",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 5",
+    "dimension_values": [
+      40,
+      29,
+      5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5617,6 +5645,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 5",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -5644,8 +5680,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 6",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 6",
+    "dimension_values": [
+      40,
+      29,
+      6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5686,6 +5726,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 6",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -5713,8 +5761,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 7",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 5",
+    "dimension_values": [
+      40,
+      29,
+      5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5754,6 +5806,14 @@
           "text": "(fehlt)",
           "url": null,
           "label": "annotates"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 5",
+          "url": null,
+          "label": "observed dimension"
         }
       ]
     },
@@ -6030,10 +6090,10 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 1",
-    "dimensions": "29 x 40 x 5",
+    "dimensions": "40 x 29 x 5",
     "dimension_values": [
-      29,
       40,
+      29,
       5
     ],
     "fields": {
@@ -6088,7 +6148,7 @@
       "crm:P40_observed_dimension": [
         {
           "type": "literal",
-          "text": "29 x 40 x 5",
+          "text": "40 x 29 x 5",
           "url": null,
           "label": "observed dimension"
         }
