@@ -11241,11 +11241,15 @@
     "group": "E",
     "number": 2,
     "marked_uncertain": false,
-    "bibliography": "Hieronymus, Opera omnia, Basel bei Froben, 1516-1520\n\n(enthält die Teile 3+4 von 9; das Verhältnis zu RCap 32 und RSC20/1-4 ist aus dem Katalog nicht ersichtlich; vermutlich sind hier Bände von zwei Druckexemplaren derselben Ausgabe in einer einzigen Aufnahme aufgenommen)",
+    "bibliography": "Hieronymus, Opera omnia, Basel bei Froben, 1516-1520",
     "owner": "SION - Médiathèque Valais",
     "shelfmark": "BCV RCap 33",
-    "dimensions": "38 cm hoch",
-    "dimension_values": null,
+    "dimensions": "38 x 25 x 6,5",
+    "dimension_values": [
+      38,
+      25,
+      6.5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -11272,7 +11276,13 @@
       "bibo:content": [
         {
           "type": "literal",
-          "text": "Hieronymus, Opera omnia, Basel bei Froben, 1516-1520\n\n(enthält die Teile 3+4 von 9; das Verhältnis zu RCap 32 und RSC20/1-4 ist aus dem Katalog nicht ersichtlich; vermutlich sind hier Bände von zwei Druckexemplaren derselben Ausgabe in einer einzigen Aufnahme aufgenommen)",
+          "text": "Hieronymus, Opera omnia, Basel bei Froben, 1516-1520",
+          "url": null,
+          "label": "content"
+        },
+        {
+          "type": "literal",
+          "text": "enthält die Teile 3+4 von 9; das Verhältnis zu RCap 32 und RSC20/1-4 ist aus dem Katalog nicht ersichtlich; vermutlich sind hier Bände von zwei Druckexemplaren derselben Ausgabe in einer einzigen Aufnahme aufgenommen",
           "url": null,
           "label": "content"
         }
@@ -11304,9 +11314,15 @@
       "crm:P40_observed_dimension": [
         {
           "type": "literal",
-          "text": "38 cm hoch",
+          "text": "38 x 25 x 6,5",
           "url": null,
           "label": "observed dimension"
+        },
+        {
+          "type": "literal",
+          "text": "nur Rückenhöhe im Katalog nachgewiesen, die anderen Masse aus Foto errechnet",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -11380,11 +11396,15 @@
     "group": "E",
     "number": 3,
     "marked_uncertain": false,
-    "bibliography": "Hieronymus, Opera omnia, Basel bei Froben, 1516-1520\n\n(enthält die Teile 7+8 von 9, dazu den Appendix; das Verhältnis zu RCap 32 und RSC20/1-4 ist aus dem Katalog nicht ersichtlich; vermutlich sind hier Bände von zwei Druckexemplaren derselben Ausgabe in einer einzigen Aufnahme aufgenommen)",
+    "bibliography": "Hieronymus, Opera omnia, Basel bei Froben, 1516-1520",
     "owner": "SION - Médiathèque Valais",
     "shelfmark": "BCV RCap 34",
-    "dimensions": "38 cm hoch",
-    "dimension_values": null,
+    "dimensions": "38 x 28 x 6",
+    "dimension_values": [
+      38,
+      28,
+      6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -11411,7 +11431,13 @@
       "bibo:content": [
         {
           "type": "literal",
-          "text": "Hieronymus, Opera omnia, Basel bei Froben, 1516-1520\n\n(enthält die Teile 7+8 von 9, dazu den Appendix; das Verhältnis zu RCap 32 und RSC20/1-4 ist aus dem Katalog nicht ersichtlich; vermutlich sind hier Bände von zwei Druckexemplaren derselben Ausgabe in einer einzigen Aufnahme aufgenommen)",
+          "text": "Hieronymus, Opera omnia, Basel bei Froben, 1516-1520",
+          "url": null,
+          "label": "content"
+        },
+        {
+          "type": "literal",
+          "text": "enthält die Teile 7+8 von 9, dazu den Appendix; das Verhältnis zu RCap 32 und RSC20/1-4 ist aus dem Katalog nicht ersichtlich; vermutlich sind hier Bände von zwei Druckexemplaren derselben Ausgabe in einer einzigen Aufnahme aufgenommen",
           "url": null,
           "label": "content"
         }
@@ -11443,9 +11469,15 @@
       "crm:P40_observed_dimension": [
         {
           "type": "literal",
-          "text": "38 cm hoch",
+          "text": "38 x 28 x 6",
           "url": null,
           "label": "observed dimension"
+        },
+        {
+          "type": "literal",
+          "text": "nur Rückenhöhe im Katalog nachgewiesen, die anderen Masse aus Foto errechnet",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
