@@ -23,21 +23,20 @@ button.secondary{background:#fff;border:1px solid #326a78;color:#205868}
 <div class="notice">Die historische Signatur bitte nur angeben, wenn sie tatsächlich belegt ist. Eine aus benachbarten Signaturen vermutete Zuordnung gehört stattdessen in die Anmerkungen. Fotos werden hier noch <strong>nicht automatisch hochgeladen</strong>; Bilddateien können im GitHub-Issue als Anhang ergänzt und später dem neuen Band zugeordnet werden.</div>
 <form id="newRecord">
 <section class="panel">
-<h2>Band und heutiger Standort</h2>
-<div class="grid">
-<div><label for="owner">Aufbewahrende Bibliothek *</label><input id="owner" required value="UB Bern"></div>
-<div><label for="shelfmark">Heutige Signatur *</label><input id="shelfmark" required placeholder="z. B. Inc III 23,3"></div>
-<div><label for="signature">Historische Thorberger Signatur</label><input id="signature" placeholder="Nur gesichert belegte Lesung"></div>
-<div><label for="dimensions">Aussenmasse (cm)</label><input id="dimensions" placeholder="Höhe x Breite x Dicke, z. B. 32 x 23 x 7"></div>
-</div>
-<label for="bibliography">Bibliographische Angaben *</label><textarea id="bibliography" required placeholder="Autor, Werktitel, Druckort, Drucker, Jahr"></textarea>
-<label for="catalogue">Katalogverweis (URL)</label><input id="catalogue" type="url" placeholder="https://swisscollections.ch/Record/...">
+<h2>Erschliessungsangaben</h2>
+<label for="owner">besitzende Institution *</label><input id="owner" required value="UB Bern">
+<label for="shelfmark">heutige Signatur *</label><input id="shelfmark" required placeholder="z. B. Inc III 23,3">
+<label for="catalogue">Katalogverweis zur heutigen Signatur (URL)</label><input id="catalogue" type="url" placeholder="https://swisscollections.ch/Record/...">
+<label for="bibliography">Kurztitel, Druckort, Drucker, Jahr *</label><textarea id="bibliography" required placeholder="Kurztitel, Druckort, Drucker, Jahr"></textarea>
+<label for="signature">Thorberger Signatur (Buchstabe und Zahl)</label><input id="signature" placeholder="Nur belegte Lesung; Unsicherheiten kennzeichnen">
+<label for="spine">Thorberger Rückentitel (Transkription)</label><textarea id="spine" placeholder="Transkription der Rückenbeschriftung"></textarea>
+<label for="description">Besitzervermerke</label><textarea id="description" placeholder="Wortlaut und Stelle der Besitzvermerke"></textarea>
+<label for="dimensions">Aussenmasse</label><input id="dimensions" placeholder="Höhe x Breite x Dicke in cm, z. B. 32 x 23 x 7">
+<label for="exteriorNotes">Notizen zum Buchäusseren (weitere Markierungen, Kettenloch, Restaurierungen, ...)</label><textarea id="exteriorNotes" placeholder="Befunde zu Einband, Markierungen und Restaurierungen"></textarea>
 </section>
 <section class="panel">
-<h2>Exemplarspezifische Angaben</h2>
-<label for="spine">Beschriftungen am Buchäusseren</label><textarea id="spine" placeholder="Transkription mit gegebenenfalls unsicheren Lesungen"></textarea>
-<label for="description">Weitere Beschreibungen, Besitzvermerke und Provenienzangaben</label><textarea id="description" placeholder="Wortlaut, Stelle im Buch, Einband, Beobachtungen"></textarea>
-<label for="photographs">Fotos und Bildzuordnungen</label><textarea id="photographs" placeholder="Vorhandene Bilddatei, Foto-ID, Beschreibung des Fotos; das Foto danach im GitHub-Issue anhängen"></textarea>
+<h2>Ergänzende Hinweise für die Neuaufnahme</h2>
+<label for="photographs">Fotos und Bildzuordnungen</label><textarea id="photographs" placeholder="Fotodateien nennen; beim Issue anhängen. Rückenaufnahme zuerst."></textarea>
 <label for="reason">Quellen, Erläuterungen und Unsicherheiten</label><textarea id="reason" placeholder="Belege oder Hinweise auf verwandte Bände"></textarea>
 </section>
 <div class="actions"><button type="submit">Neuen Band als GitHub-Issue vorschlagen</button><button type="button" class="secondary" id="download">Vorschlag als JSON sichern</button></div>
@@ -45,7 +44,7 @@ button.secondary{background:#fff;border:1px solid #326a78;color:#205868}
 </form></main>
 <script>
 const $=id=>document.getElementById(id);
-const ids=['owner','shelfmark','signature','dimensions','bibliography','catalogue','spine','description','photographs','reason'];
+const ids=['owner','shelfmark','bibliography','signature','spine','description','dimensions','exteriorNotes','catalogue','photographs','reason'];
 const params=new URLSearchParams(location.search);
 if(params.get('shelfmark'))$('shelfmark').value=params.get('shelfmark');
 if(params.get('bibliography'))$('bibliography').value=params.get('bibliography');
@@ -53,7 +52,7 @@ if(params.get('reason'))$('reason').value=params.get('reason');
 function proposal(){const o={schema:'thorberg-new-record-v1'};for(const id of ids)o[id]=$(id).value.trim();return o}
 function download(){const p=proposal(),blob=new Blob([JSON.stringify(p,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='thorberg-neuer-band.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 $('download').onclick=download;
-$('newRecord').onsubmit=e=>{e.preventDefault();const p=proposal();const lines=['**Neuer Band – Aufnahmevorschlag**','','**Aufbewahrende Bibliothek:** '+p.owner,'**Heutige Signatur:** '+p.shelfmark,'**Historische Thorberger Signatur:** '+(p.signature||'nicht erfasst / nicht gesichert'),'','### Bibliographische Angaben',p.bibliography,'','### Katalogverweis',p.catalogue||'–','','### Aussenmasse',p.dimensions||'–','','### Beschriftungen',p.spine||'–','','### Weitere Angaben',p.description||'–','','### Fotos und Bildzuordnungen',p.photographs||'–','','### Quellen und Bemerkungen',p.reason||'–'];
+$('newRecord').onsubmit=e=>{e.preventDefault();const p=proposal();const lines=['**Neuer Band – Aufnahmevorschlag**','','**besitzende Institution:** '+p.owner,'**heutige Signatur:** '+p.shelfmark,'','### Kurztitel, Druckort, Drucker, Jahr',p.bibliography,'','### Thorberger Signatur (Buchstabe und Zahl)',p.signature||'nicht erfasst / nicht gesichert','','### Thorberger Rückentitel (Transkription)',p.spine||'–','','### Besitzervermerke',p.description||'–','','### Aussenmasse',p.dimensions||'–','','### Notizen zum Buchäusseren (weitere Markierungen, Kettenloch, Restaurierungen, ...)',p.exteriorNotes||'–','','### Katalogverweis zur heutigen Signatur',p.catalogue||'–','','### Fotos und Bildzuordnungen',p.photographs||'–','','### Quellen und Bemerkungen',p.reason||'–'];
 const payload='<!-- THORBERG_NEW_RECORD_V1\n'+JSON.stringify(p)+'\nEND_THORBERG_NEW_RECORD_V1 -->';
 const body=lines.join('\n')+'\n\n'+payload;
 if(encodeURIComponent(body).length>6500){download();alert('Der Vorschlag ist sehr umfangreich. Die JSON-Datei wurde heruntergeladen. Bitte beim Issue anhängen.');}
