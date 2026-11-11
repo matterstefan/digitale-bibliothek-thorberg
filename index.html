@@ -13,7 +13,7 @@
 <main><div class="bar"><input id="query" type="search" placeholder="Signatur, Titel, Standort oder Text am Buch suchen …" aria-label="Bände durchsuchen"><div class="tabs"><button id="gridBtn" class="active">Signaturlandschaft</button><button id="stackBtn">Schematische Stapel</button></div></div>
 <p style="margin:9px 0 14px;font-size:14px"><a href="neuer-band.html">+ Neuen Thorberger Band erfassen</a></p><div class="groups" id="groups"></div><div class="bar"><label><input id="uncertain" type="checkbox"> Nur eindeutig sortierbare Signaturen ohne Unsicherheitszeichen</label><label><input id="measures" type="checkbox"> Nur Bände mit Massen</label></div>
 <div class="legend"><span><i class="swatch"></i> Nicht ausdrücklich als unsicher markiert (keine Sicherheitseinstufung)</span><span><i class="swatch warn"></i> Sichtbar unsichere Signatur</span><span><i class="swatch unknown"></i> Nicht eindeutig sortierbar</span></div>
-<div id="stackOpts" class="shelfControls" hidden><label>Beschriftung <select id="labelMode"><option value="sig">Signatur</option><option value="title">Kurztitel</option><option value="both" selected>Beides</option></select></label><label>Max. Bände pro Stapel <select id="stackCount"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label><label><input id="useDims" type="checkbox" checked> Gemäss tatsächlichen Buchmassen skalieren (soweit vorhanden)</label><label>Stapelbildung <select id="packingMode"><option value="count">Nach Anzahl</option><option value="size">Grössenorientiert</option></select></label><button id="resetPiles" class="stackReset" title="Manuell gesetzte Stapelanfänge entfernen">Manuelle Stapelanfänge zurücksetzen</button><span class="subtext" id="dimKey" hidden><span style="display:inline-block;width:20px;height:12px;border:2px dashed #5a6369;vertical-align:-2px;margin-right:5px"></span>Gestrichelter Umriss: keine Masse erfasst (schematische Grösse)</span></div>
+<div id="stackOpts" class="shelfControls" hidden><label>Beschriftung <select id="labelMode"><option value="sig">Signatur</option><option value="title">Kurztitel</option><option value="both" selected>Beides</option></select></label><label>Max. Bände pro Stapel <select id="stackCount"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label><label><input id="useDims" type="checkbox" checked> Gemäss tatsächlichen Buchmassen skalieren (soweit vorhanden)</label><label>Stapelbildung <select id="packingMode"><option value="count">Nach Anzahl</option><option value="size" selected>Grössenorientiert</option></select></label><button id="resetPiles" class="stackReset" title="Manuell gesetzte Stapelanfänge entfernen">Manuelle Stapelanfänge zurücksetzen</button><span class="subtext" id="dimKey" hidden><span style="display:inline-block;width:20px;height:12px;border:2px dashed #5a6369;vertical-align:-2px;margin-right:5px"></span>Gestrichelter Umriss: keine Masse erfasst (schematische Grösse)</span></div>
 <p id="dragHint" class="stackNotice" hidden>Band auf einen braunen Regalboden ziehen, um <strong>bei diesem Band</strong> einen neuen Stapel zu beginnen. Die Stapel werden anschliessend nach Grössen neu aufgebaut; die historische Signaturfolge bleibt unverändert. Ein Klick öffnet die Banddetails. Die Änderungen gelten nur für die aktuelle Sitzung.</p><div class="summary"><b id="count"></b><span class="subtext">Band anklicken für alle Daten und Fotos</span></div><div id="content"></div>
 <div class="footer">Die Erschliessung der überlieferten Bände wird laufend ergänzt. Zur Datenherkunft und Dokumentation der Änderungen siehe <a href="projekt.html#daten-und-versionierung">über das Projekt</a>.</div></main>
 <div class="detailOverlay" id="overlay" role="dialog" aria-modal="true" aria-label="Banddetails"><div class="detail" id="detail"><button class="close" id="close">Schliessen ×</button><div id="detailContent"></div></div></div>
@@ -4655,8 +4655,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 4",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 5",
+    "dimension_values": [
+      40,
+      29,
+      5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -4708,6 +4712,14 @@
           "text": "Iste liber pertinet domui Porte Montis prope Bernum ord. Carth.",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 5",
+          "url": null,
+          "label": "observed dimension"
         }
       ]
     },
@@ -5428,10 +5440,10 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 2",
-    "dimensions": "29 x 40 x 5",
+    "dimensions": "40 x 29 x 5",
     "dimension_values": [
-      29,
       40,
+      29,
       5
     ],
     "fields": {
@@ -5486,7 +5498,7 @@
       "crm:P40_observed_dimension": [
         {
           "type": "literal",
-          "text": "29 x 40 x 5",
+          "text": "40 x 29 x 5",
           "url": null,
           "label": "observed dimension"
         }
@@ -5525,8 +5537,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 3",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 5",
+    "dimension_values": [
+      40,
+      29,
+      5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5567,6 +5583,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 5",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -5594,8 +5618,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5: 5",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 5",
+    "dimension_values": [
+      40,
+      29,
+      5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5636,6 +5664,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 5",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -5663,8 +5699,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 6",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 6",
+    "dimension_values": [
+      40,
+      29,
+      6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5705,6 +5745,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 6",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -5732,8 +5780,12 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 7",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "40 x 29 x 5",
+    "dimension_values": [
+      40,
+      29,
+      5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5773,6 +5825,14 @@
           "text": "(fehlt)",
           "url": null,
           "label": "annotates"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "40 x 29 x 5",
+          "url": null,
+          "label": "observed dimension"
         }
       ]
     },
@@ -6049,10 +6109,10 @@
     "bibliography": "Nicolaus von Lyra, Postilla super totam Bibliam, Strassburg bei Mentelin 1472",
     "owner": "BCU Fribourg",
     "shelfmark": "Z 5 : 1",
-    "dimensions": "29 x 40 x 5",
+    "dimensions": "40 x 29 x 5",
     "dimension_values": [
-      29,
       40,
+      29,
       5
     ],
     "fields": {
@@ -6107,7 +6167,7 @@
       "crm:P40_observed_dimension": [
         {
           "type": "literal",
-          "text": "29 x 40 x 5",
+          "text": "40 x 29 x 5",
           "url": null,
           "label": "observed dimension"
         }
@@ -11675,8 +11735,11 @@ function toggleStart(g,id){if(!manualStarts.has(g))manualStarts.set(g,new Set())
 const ASSUMED_FOOTPRINT=[22,16];
 function measuredFootprint(x){const d=x.dimension_values;return Array.isArray(d)&&d.length>=3&&d[0]>0&&d[1]>0?[Math.max(d[0],d[1]),Math.min(d[0],d[1])]:null}
 function footprint(x){return measuredFootprint(x)||ASSUMED_FOOTPRINT}
-function isLarger(above,below){const a=footprint(above),b=footprint(below);return a[0]>b[0]+.0001||a[1]>b[1]+.0001}
-function sizeScore(x){const a=footprint(x);return a[0]*a[1]}
+// Für die Stapelreihenfolge zählt die gezeichnete Rückenlänge (Buchhöhe),
+// nicht die Deckelfläche. So kann kein längerer Buchrücken auf einem kürzeren liegen.
+function drawnSpineWidth(x){const d=measuredFootprint(x);return $('useDims').checked&&d?Math.max(100,Math.min(245,x.dimension_values[0]*5+70)):180}
+function isLarger(above,below){return drawnSpineWidth(above)>drawnSpineWidth(below)+.0001}
+function sizeScore(x){return drawnSpineWidth(x)}
 function pilesFor(arr,g){
   const max=Number($('stackCount').value),sized=$('packingMode').value==='size';
   const piles=[];let current=[];let manualBase=false;
@@ -11742,6 +11805,6 @@ editLink.addEventListener('click',()=>{try{sessionStorage.setItem('thorberg-retu
 propose.append(editLink);propose.append(el('small','',' · Ergänzungen werden vor der Veröffentlichung geprüft.'));d.append(propose);
 $('overlay').classList.add('open');document.body.classList.add('modal-open');$('detail').scrollTop=0;history.replaceState(null,'','#band-'+x.id)}
 function close(){ $('overlay').classList.remove('open');document.body.classList.remove('modal-open');history.replaceState(null,'',location.pathname+location.search)}
-$('close').onclick=close;$('overlay').addEventListener('click',e=>{if(e.target===$('overlay'))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});$('gridBtn').onclick=()=>{mode='grid';render()};$('stackBtn').onclick=()=>{mode='stack';$('useDims').checked=true;$('labelMode').value='both';render()};$('resetPiles').onclick=()=>{manualStarts.clear();render()};for(const id of ['query','uncertain','measures','labelMode','stackCount','useDims','packingMode'])$(id).addEventListener('input',render);try{const saved=JSON.parse(sessionStorage.getItem('thorberg-return-v1')||'null');if(saved&&location.hash==='#band-'+saved.band){group=groups.includes(saved.group)?saved.group:'Alle';mode=saved.mode==='stack'?'stack':'grid';$('query').value=saved.query||'';$('uncertain').checked=!!saved.uncertain;$('measures').checked=!!saved.measures;for(const key of ['labelMode','stackCount','packingMode']){if(saved[key]&&[...$(key).options].some(o=>o.value===String(saved[key])))$(key).value=String(saved[key]);}$('useDims').checked=!!saved.useDims;if(Array.isArray(saved.manualStarts)){manualStarts.clear();for(const pair of saved.manualStarts){if(Array.isArray(pair)&&pair.length===2&&Array.isArray(pair[1]))manualStarts.set(pair[0],new Set(pair[1]))}}}}catch(e){console.warn('Navigation state could not be restored',e)}
+$('close').onclick=close;$('overlay').addEventListener('click',e=>{if(e.target===$('overlay'))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});$('gridBtn').onclick=()=>{mode='grid';render()};$('stackBtn').onclick=()=>{mode='stack';$('useDims').checked=true;$('labelMode').value='both';$('packingMode').value='size';render()};$('resetPiles').onclick=()=>{manualStarts.clear();render()};for(const id of ['query','uncertain','measures','labelMode','stackCount','useDims','packingMode'])$(id).addEventListener('input',render);try{const saved=JSON.parse(sessionStorage.getItem('thorberg-return-v1')||'null');if(saved&&location.hash==='#band-'+saved.band){group=groups.includes(saved.group)?saved.group:'Alle';mode=saved.mode==='stack'?'stack':'grid';$('query').value=saved.query||'';$('uncertain').checked=!!saved.uncertain;$('measures').checked=!!saved.measures;for(const key of ['labelMode','stackCount','packingMode']){if(saved[key]&&[...$(key).options].some(o=>o.value===String(saved[key])))$(key).value=String(saved[key]);}$('useDims').checked=!!saved.useDims;if(Array.isArray(saved.manualStarts)){manualStarts.clear();for(const pair of saved.manualStarts){if(Array.isArray(pair)&&pair.length===2&&Array.isArray(pair[1]))manualStarts.set(pair[0],new Set(pair[1]))}}}}catch(e){console.warn('Navigation state could not be restored',e)}
 render();const selected=location.hash.match(/^#band-(\d+)$/);if(selected){const r=records.find(x=>x.id===Number(selected[1]));if(r)show(r)}
 </script></body></html>
