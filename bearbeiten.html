@@ -34,7 +34,8 @@ button:disabled{opacity:.45;cursor:not-allowed}.field{background:#fff;border:1px
 <script>
 const $=id=>document.getElementById(id),repo='matterstefan/digitale-bibliothek-thorberg';
 let records=[],active=null,source=null,working=null;
-const fieldLabels={'bibo:owner':'Heutige Bibliothek','bibo:locator':'Heutige Signatur und Katalogverweise','bibo:content':'Bibliographische Angaben','bibo:number':'Historische Signatur und weitere Lesungen','bibo:annotates':'Beschriftungen am Buchäusseren','dcterms:description':'Beschreibung und Anmerkungen','crm:P40_observed_dimension':'Aussenmasse'};
+const fieldLabels={'bibo:owner':'besitzende Institution','bibo:locator':'heutige Signatur','bibo:content':'Kurztitel, Druckort, Drucker, Jahr','bibo:number':'Thorberger Signatur (Buchstabe und Zahl)','bibo:annotates':'Thorberger Rückentitel (Transkription)','dcterms:description':'Besitzervermerke','crm:P40_observed_dimension':'Aussenmasse','crm:P65_shows_visual_item':'Notizen zum Buchäusseren (weitere Markierungen, Kettenloch, Restaurierungen, ...)'};
+const fieldOrder=['bibo:owner','bibo:locator','bibo:content','bibo:number','bibo:annotates','dcterms:description','crm:P40_observed_dimension','crm:P65_shows_visual_item'];
 const clone=x=>JSON.parse(JSON.stringify(x));
 const esc=s=>String(s??'').replace(/[&<>"']/g,t=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[t]));
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
@@ -47,13 +48,13 @@ $('fields').replaceChildren();$('newfield').classList.toggle('hidden',!active);$
 if(!active){$('summary').textContent='';refresh();return}
 source=clone(active.fields);working=clone(active.fields);
 $('summary').textContent=active.signature+' · '+active.bibliography+' · '+(active.owner||'')+' · Band '+active.id;
-const keys=[...new Set([...Object.keys(fieldLabels),...Object.keys(source)])].sort((a,b)=>((Object.keys(source).includes(a)?0:1)-(Object.keys(source).includes(b)?0:1)));
+const keys=[...new Set([...fieldOrder,...Object.keys(source)])].sort((a,b)=>{const ai=fieldOrder.indexOf(a),bi=fieldOrder.indexOf(b);return (ai<0?1000:ai)-(bi<0?1000:bi)});
 $('fieldkey').innerHTML=keys.map(key=>'<option value="'+esc(key)+'">'+esc(fieldLabels[key]||key)+'</option>').join('');
 render();
 }
 function render(){
 $('fields').replaceChildren();
-for(const [key,values] of Object.entries(working)){
+for(const key of [...Object.keys(working)].sort((a,b)=>{const ai=fieldOrder.indexOf(a),bi=fieldOrder.indexOf(b);return (ai<0?1000:ai)-(bi<0?1000:bi)})){const values=working[key];
 const section=document.createElement('section');section.className='field';
 const top=document.createElement('div');top.className='fieldhead';
 const title=document.createElement('h3');title.textContent=fieldLabels[key]||key;
