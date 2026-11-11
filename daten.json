@@ -4323,8 +4323,12 @@
     "bibliography": "Augustinus, Opera omnia in 11 Teilen, Basel bei Ammerbach 1506",
     "owner": "UB Bern",
     "shelfmark": "Inc III 41,8",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32 x 23 x 8",
+    "dimension_values": [
+      32,
+      23,
+      8
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -4372,6 +4376,14 @@
           "text": "auf Vorderspiegel: \"Hic liber pertinet domui sancte paule alias torberg ordinis cartusiensis\"",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32 x 23 x 8",
+          "url": null,
+          "label": "observed dimension"
         }
       ]
     },
@@ -4705,8 +4717,12 @@
     "bibliography": "Augustinus, Opera omnia in 11 Teilen, Basel bei Ammerbach 1506",
     "owner": "UB Bern",
     "shelfmark": "Inc III 41,6",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "33 x 23 x 11",
+    "dimension_values": [
+      33,
+      23,
+      11
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -4755,6 +4771,14 @@
           "url": null,
           "label": "Description"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "33 x 23 x 11",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -4782,8 +4806,12 @@
     "bibliography": "Augustinus, Opera omnia in 11 Teilen, Basel bei Ammerbach 1506",
     "owner": "UB Bern",
     "shelfmark": "Inc III 41,7",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32 x 23 x 6",
+    "dimension_values": [
+      32,
+      23,
+      6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -4832,6 +4860,14 @@
           "url": null,
           "label": "Description"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32 x 23 x 6",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -4859,8 +4895,12 @@
     "bibliography": "Augustinus, Opera omnia in 11 Teilen, Basel bei Ammerbach 1506",
     "owner": "UB Bern",
     "shelfmark": "Inc III 41,3",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32 x 23 x 8",
+    "dimension_values": [
+      32,
+      23,
+      8
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -4901,6 +4941,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32 x 23 x 8",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -4928,8 +4976,12 @@
     "bibliography": "Augustinus, Opera omnia in 11 Teilen, Basel bei Ammerbach 1506",
     "owner": "UB Bern",
     "shelfmark": "Inc III 41,5",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "34 x 24 x 8",
+    "dimension_values": [
+      34,
+      24,
+      8
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -4978,6 +5030,14 @@
           "url": null,
           "label": "Description"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "34 x 24 x 8",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -5005,8 +5065,12 @@
     "bibliography": "Augustinus, Opera omnia in 11 Teilen, Basel bei Ammerbach 1506",
     "owner": "UB Bern",
     "shelfmark": "Inc III 41,1",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "33 x 23 x 7",
+    "dimension_values": [
+      33,
+      23,
+      7
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5054,6 +5118,14 @@
           "text": "auf Vorderspiegel: \"Iste liber pertinet ad Thorberg ordinis cartusiensis\"",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "33 x 23 x 7",
+          "url": null,
+          "label": "observed dimension"
         }
       ]
     },
@@ -5167,8 +5239,12 @@
     "bibliography": "Augustinus, Opera omnia in 11 Teilen, Basel bei Ammerbach 1506",
     "owner": "UB Bern",
     "shelfmark": "Inc III 41,4",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32 x 23 x 5",
+    "dimension_values": [
+      32,
+      23,
+      5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5209,6 +5285,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32 x 23 x 5",
+          "url": null,
+          "label": "observed dimension"
+        }
       ]
     },
     "media": [
@@ -5236,8 +5320,12 @@
     "bibliography": "Augustinus, Opera omnia in 11 Teilen, Basel bei Ammerbach 1506",
     "owner": "UB Bern",
     "shelfmark": "Inc III 41,2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32 x 23 x 7",
+    "dimension_values": [
+      32,
+      23,
+      7
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -5285,6 +5373,14 @@
           "text": "auf Vorderspiegel: \"Liber hic pertinet domui sancte paule <alias> torberg ordinis cartusiensis\"",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32 x 23 x 7",
+          "url": null,
+          "label": "observed dimension"
         }
       ]
     },
