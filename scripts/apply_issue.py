@@ -83,20 +83,29 @@ def validate_values(values):
 
 
 def parse_dimensions(values):
+    """The first literal is the measurement; further literals may explain its provenance.
+
+    Keep commentary in the original field values, but never use it as
+    measurements for the size visualisation. Partial heights remain unscaled.
+    """
     if not values:
         return "", None
-    if len(values) != 1 or values[0]["type"] != "literal":
-        raise ValueError("The visualisation supports exactly one dimension value")
+    if values[0]["type"] != "literal":
+        raise ValueError("The first dimension value must be text")
+    if any(v["type"] != "literal" for v in values[1:]):
+        raise ValueError("Dimension notes must be text")
     text = values[0]["text"].strip()
     if not text:
         return "", None
-    parts = re.split(r"\s*[x×]\s*", text, flags=re.I)
-    if len(parts) != 3 or not all(re.fullmatch(r"\d+(?:[,.]\d+)?", p) for p in parts):
-        raise ValueError("Measurements need the format height x width x depth (cm)")
-    nums = [float(p.replace(",", ".")) for p in parts]
-    if not all(0 < v <= 200 for v in nums):
-        raise ValueError("Measurements out of plausible range")
-    return text, nums
+    parts = re.split(r"\\s*[x×]\\s*", text, flags=re.I)
+    if len(parts) == 3 and all(re.fullmatch(r"\\d+(?:[,.]\\d+)?", p) for p in parts):
+        nums = [float(p.replace(",", ".")) for p in parts]
+        if not all(0 < v <= 200 for v in nums):
+            raise ValueError("Measurements out of plausible range")
+        return text, nums
+    if re.fullmatch(r"\\d+(?:[,.]\\d+)?\\s*cm\\s*hoch", text, flags=re.I):
+        return text, None
+    raise ValueError("Measurements need height x width x depth (cm), or a documented height such as '38 cm hoch'")
 
 
 def literal_first(values):
