@@ -8885,8 +8885,12 @@
     "bibliography": "Johannes Chrisostomus, Basel 1504",
     "owner": "UB Bern",
     "shelfmark": "Inc I 69,1",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32.5 x 23.5 x 6",
+    "dimension_values": [
+      32.5,
+      23.5,
+      6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -8933,6 +8937,14 @@
           "url": null,
           "label": "annotates"
         }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32.5 x 23.5 x 6",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
       ]
     },
     "media": [
@@ -8960,8 +8972,12 @@
     "bibliography": "Johannes Chrisostomus, Basel 1504",
     "owner": "UB Bern",
     "shelfmark": "Inc I 69,2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32.5 x 24 x 8",
+    "dimension_values": [
+      32.5,
+      24,
+      8
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -9015,6 +9031,14 @@
           "text": "UB Bern",
           "url": null,
           "label": "Title"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32.5 x 24 x 8",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
