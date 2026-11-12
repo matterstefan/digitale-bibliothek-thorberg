@@ -567,8 +567,12 @@
     "bibliography": "Vitas patrum, Lyon bei Wolff 1502",
     "owner": "UB Bern",
     "shelfmark": "Inc III 65",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "25.5 x 18 x 4",
+    "dimension_values": [
+      25.5,
+      18,
+      4
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -622,6 +626,22 @@
           "text": "Iste liber pertinet domui portemontis wulgus torberg ordinis cartusiensis",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "25.5 x 18 x 4",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
+      ],
+      "crm:P65_shows_visual_item": [
+        {
+          "type": "literal",
+          "text": "auf dem vorderen Buchdeckel: \"Vita patrum\"",
+          "url": null,
+          "label": "P65_shows_visual_item"
         }
       ]
     },
@@ -4248,8 +4268,12 @@
     "bibliography": "Albertus Magnus, Summa, [Basilee], [ex officina Iacobi de pfortzheim], [1507]",
     "owner": "UB Bern",
     "shelfmark": "Inc I 25,2",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "32 x 23 x 6",
+    "dimension_values": [
+      32,
+      23,
+      6
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -4295,6 +4319,14 @@
           "text": "Kurztitel auch am oberen Rand des vorderen Buchdeckels",
           "url": null,
           "label": "shows visual item"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "32 x 23 x 6",
+          "url": null,
+          "label": "P40_observed_dimension"
         }
       ]
     },
@@ -6306,8 +6338,12 @@
     "bibliography": "Gregor, Dekretalen, Basel 1511",
     "owner": "UB Bern",
     "shelfmark": "Inc II 10",
-    "dimensions": "",
-    "dimension_values": null,
+    "dimensions": "44 x 31 x 9.5",
+    "dimension_values": [
+      44,
+      31,
+      9.5
+    ],
     "fields": {
       "bibo:owner": [
         {
@@ -6361,6 +6397,22 @@
           "text": "auf vorderem Spiegel: \"Liber cartusiensis in Torberg. Donatus a mgro Joanne Frobenn Impressore ac cive Basilensi Anno 1513\"",
           "url": null,
           "label": "Description"
+        }
+      ],
+      "crm:P40_observed_dimension": [
+        {
+          "type": "literal",
+          "text": "44 x 31 x 9.5",
+          "url": null,
+          "label": "P40_observed_dimension"
+        }
+      ],
+      "crm:P65_shows_visual_item": [
+        {
+          "type": "literal",
+          "text": "auf dem Vorderdeckel aussen: \"decretales Gregorij\"",
+          "url": null,
+          "label": "P65_shows_visual_item"
         }
       ]
     },
