@@ -97,13 +97,13 @@ def parse_dimensions(values):
     text = values[0]["text"].strip()
     if not text:
         return "", None
-    parts = re.split(r"\\s*[x×]\\s*", text, flags=re.I)
-    if len(parts) == 3 and all(re.fullmatch(r"\\d+(?:[,.]\\d+)?", p) for p in parts):
+    parts = re.split(r"\s*[x×]\s*", text, flags=re.I)
+    if len(parts) == 3 and all(re.fullmatch(r"\d+(?:[,.]\d+)?", p) for p in parts):
         nums = [float(p.replace(",", ".")) for p in parts]
         if not all(0 < v <= 200 for v in nums):
             raise ValueError("Measurements out of plausible range")
         return text, nums
-    if re.fullmatch(r"\\d+(?:[,.]\\d+)?\\s*cm\\s*hoch", text, flags=re.I):
+    if re.fullmatch(r"\d+(?:[,.]\d+)?\s*cm\s*hoch", text, flags=re.I):
         return text, None
     raise ValueError("Measurements need height x width x depth (cm), or a documented height such as '38 cm hoch'")
 
