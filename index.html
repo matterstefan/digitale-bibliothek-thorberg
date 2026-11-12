@@ -11742,7 +11742,7 @@ function isLarger(above,below){return drawnSpineWidth(above)>drawnSpineWidth(bel
 function sizeScore(x){return drawnSpineWidth(x)}
 function pilesFor(arr,g){
   const max=Number($('stackCount').value);
-  const piles=[];let current=[];let manualBase=false;
+  const piles=[];let current=[];
   for(const x of arr){
     // Ein gesetzter Stapelanfang ist eine feste Grenze in der Signaturfolge.
     // Ein grösseres Folgebuch darf nicht auf den manuell gesetzten Sockel kommen.
@@ -11750,9 +11750,8 @@ function pilesFor(arr,g){
     const forced=isStart(g,x.id);
     const tooBig=!!(current.length&&previous&&isLarger(x,previous));
     if(current.length&&(current.length>=max||forced||tooBig)){
-      piles.push(current);current=[];manualBase=false;
+      piles.push(current);current=[];
     }
-    if(!current.length&&forced)manualBase=true;
     current.push(x);
   }
   if(current.length)piles.push(current);
