@@ -11849,7 +11849,7 @@ function status(x){return hasQuestionableSignature(x)?'warn':x.number===null?'un
 // Unsichere, aber vollständig lesbare Zahlenteile bleiben in der Signaturfolge.
 function orderNumber(x){
   if(Number.isFinite(x.number))return x.number;
-  const match=String(x.signature||'').match(/^[A-Z]\\s+([MDCLXVI]+)\\s+(?:\\[\\?\\]|\\(\\?\\))$/);
+  const match=String(x.signature||'').match(/^[A-Z]\s+([MDCLXVI]+)\s+(?:\[\?\]|\(\?\))$/);
   if(!match)return null;
   const chars={M:1000,D:500,C:100,L:50,X:10,V:5,I:1};
   const roman=match[1];let total=0;
